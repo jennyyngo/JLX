@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+{% load staticfiles %} <!-- New line -->
+<html>
+    <head>
+        <title>GrubHunt</title>
+    </head>
+
+    <body>
+    	{% if user.is_authenticated %}
+			<h1>GrubHunt says... hello {{ user.username }}!</h1>
+		{% else %}
+			<h1>GrubHunt says... hello world!</h1>
+		{% endif %}
+
+
+        {% if user.is_staff %}
+        	<p> Hello admin, would you like to  <a href="/GrubHunt/update/">update</a> the database? </p>
+        {% endif %} 
+       	{% if user.is_authenticated %}
+			<a href="/GrubHunt/restricted/">Restricted Page</a><br />
+			<a href="/GrubHunt/logout/">Logout</a><br />
+		{% else %}
+			<a href="/GrubHunt/register/">Register Here</a><br />
+			<a href="/GrubHunt/login/">Login</a><br />
+		{% endif %}
+
+    </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+{% load staticfiles %} <!-- New line -->
+<html>
+    <head>
+        <title>Database Update</title>
+    </head>
+
+    <body>
+
+		<h1>Checking for new food vendors...</h1>
+		
+        {% if added_vendors %}
+            <ul>
+                {% for vendor in added_vendors %}
+                   <li>{{ vendor }} was added</li>
+                {% endfor %}
+            </ul>
+       {% else %}
+            <strong>There were no food vendors added.</strong>
+       {% endif %}
+
+
+    </body>
+</html>
