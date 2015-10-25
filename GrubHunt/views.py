@@ -10,6 +10,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import logout
 
 
+
 def index(request):
     # Query the database for a list of ALL categories currently stored.
     # Order the categories by no. likes in descending order.
@@ -148,4 +149,8 @@ def update(request):
 
     # Render the response and send it back!
     return render(request, 'GrubHunt/update.html', context_dict)
-    
+
+def vendors(request):
+    vendor_list = FoodVendor.objects.order_by('key')
+    context_dict = {'vendor_list':vendor_list}
+    return render(request, 'GrubHunt/vendors.html', context_dict)
