@@ -8,6 +8,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import logout
+import googlemaps
+from datetime import datetime
 
 
 
@@ -153,4 +155,10 @@ def update(request):
 def vendors(request):
     vendor_list = FoodVendor.objects.order_by('key')
     context_dict = {'vendor_list':vendor_list}
+		
     return render(request, 'GrubHunt/vendors.html', context_dict)
+
+# have not decided if want a separate view for finding route
+# this view does the same thing in the find_route function in vendors view
+def find_route(request):
+    return render (request, 'GrubHunt/find_route.html', {})

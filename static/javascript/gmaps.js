@@ -29,6 +29,11 @@ var contentString = '<div id="content">'+
   marker.addListener('click', function() {
     infowindow.open(map, marker);
   });
-
 }
+
+
+
+
+	
+
 
