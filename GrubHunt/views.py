@@ -105,7 +105,7 @@ def user_login(request):
                 # If the account is valid and active, we can log the user in.
                 # We'll send the user back to the homepage.
                 login(request, user)
-                return HttpResponseRedirect('/GrubHunt/')
+                return HttpResponseRedirect('/GrubHunt/list_vendors')
             else:
                 # An inactive account was used - no logging in!
                 return HttpResponse("Your GrubHunt account is disabled.")
@@ -160,6 +160,7 @@ def vendors(request):
 
 # have not decided if want a separate view for finding route
 # this view does the same thing in the find_route function in vendors view
+<<<<<<< HEAD
 def find_route(request,vendor_slug):
     context_dict = {}
 	
@@ -172,3 +173,13 @@ def find_route(request,vendor_slug):
         pass
 	
     return render (request, 'GrubHunt/find_route.html', context_dict)
+=======
+def find_route(request):
+    return render (request, 'GrubHunt/find_route.html', {})
+
+def list_vendors(request):
+    vendor_list = FoodVendor.objects.order_by('businessName')
+    context_dict = {'vendor_list':vendor_list}
+
+    return render(request, 'GrubHunt/list_vendors.html', context_dict)
+>>>>>>> e5b7a75d58f559a2290fb52e8ff81eb706d0793b

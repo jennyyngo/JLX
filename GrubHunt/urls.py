@@ -9,5 +9,6 @@ urlpatterns = patterns('',
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^update/$', views.update, name='update'),
     url(r'^vendors/$', views.vendors, name='vendors'),
-	url(r'^find_route/(?P<category_name_slug>[\w\-]+)/$',views.find_route, name='find_route'),
+	url(r'^find_route/(?P<vendor_slug>[\w\-]+)/$',views.find_route, name='find_route'),
+	url(r'^list_vendors/$', views.list_vendors, name='list_vendors'),
     )
