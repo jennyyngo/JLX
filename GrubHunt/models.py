@@ -23,6 +23,11 @@ class FoodVendor(models.Model):
 	businessName = models.CharField(max_length=128, null=True)
 	address = models.CharField(max_length=128)
 	description = models.CharField(max_length=128)
+	slug = models.SlugField(unique=True)
+	
+	def save(self, *args, **kwargs):
+			self.slug = slugify(self.key)
+			super(FoodVendor, self).save(*args, **kwargs)
 	
 	def __unicode__(self):      #For Python 2, use __str__ on Python 3
 		return self.key

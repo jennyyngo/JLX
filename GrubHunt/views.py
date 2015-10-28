@@ -160,5 +160,15 @@ def vendors(request):
 
 # have not decided if want a separate view for finding route
 # this view does the same thing in the find_route function in vendors view
-def find_route(request):
-    return render (request, 'GrubHunt/find_route.html', {})
+def find_route(request,vendor_slug):
+    context_dict = {}
+	
+    try:
+		# if we ccannot find a slug with given key raise a exception
+        vendor = Vendor.objects.get(slug=vendor_slug)
+        context_dict['vendor'] = vendor
+        context_dict['vendor_slug']=vendor.slug
+    except Vendor.DoesNotExist:
+        pass
+	
+    return render (request, 'GrubHunt/find_route.html', context_dict)

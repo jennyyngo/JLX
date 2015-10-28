@@ -43,11 +43,15 @@
   
 	<!-- Layout as nav mode to display the info of restruant -->
 	<div id="nav">
-	This will display as a nav</br>
-	Name: </br>
-	Description: </br>
-	Adress: </br>
 	
+	<!-- display info of the vendor -->
+	{% if vendor %}
+	Name: {{vendor.businessName}}</br>
+	Description: {{vendor.description}}</br>
+	Adress: {{vendor.address}}</br>
+	{% endif %}
+	
+	<!-- find route text boxes -->
 		<form id="find_route" name="find_route" method="POST" action="#">
             {% csrf_token %}
 			
@@ -72,7 +76,7 @@
 	</div>
 	
 	  
-		<div id="map"></div>
+	<div id="map"></div>
 
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKhtN-Y5ahiOTzVHtpMLC3bBqs8j6s56Q&callback=initMap"
 			async defer></script>
