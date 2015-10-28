@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+
+
+<html>
+    <head>
+        <title>GrubHunt - List Of Vendors</title>
+
+    <style>
+    </style>
+    </head>
+
+    <body>
+
+    	<div id="header">
+
+    		
+    		<h1 style="text-align:left;float:left;"><font size="4">
+    			{% if user.is_authenticated %}
+    			<a href="/GrubHunt/logout">Logout</a></h1>
+    		{% else %}	
+    		<a href="/GrubHunt/login">Login</a>
+    	{% endif %}
+    </font></h1>
+    		
+
+			<h2 style="text-align:right;float:right;"><font size="4"><a href="/GrubHunt/vendors">Map View</a></font></h2>
+			<hr style="clear:both;"/>
+</div>
+<br>
+    	<h1>Here is a list of food vendors in Vancouver:</h1>
+    
+
+
+      
+      {% for v in vendor_list %}
+      <center><p>
+      {% if not v.businessName %}
+      Food Truck Place
+      {% else %}
+      {{v.businessName}},
+      {% endif %}
+      <br>
+      <a href="/GrubHunt/find_route/">
+      {{v.address}},
+       </a></p></center>
+        {% endfor %}
+
+
+
+    </body>
+
+</html>
