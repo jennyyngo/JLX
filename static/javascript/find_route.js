@@ -1,3 +1,4 @@
+
 function find_route(from_pos, to_pos) {
         // Center initialized to vancouver
         var myOptions = {
@@ -32,6 +33,11 @@ function find_route(from_pos, to_pos) {
         );
       }
 
+function getlatlng(latitude,longitude){
+	var lat = latitude;
+	var lng = longitude;
+}
+
 $(document).ready(function() {
         // If the browser supports the Geolocation API
     if (typeof navigator.geolocation == "undefined") {
@@ -39,8 +45,30 @@ $(document).ready(function() {
           return;
     }
 
-$("#find_route").submit(function(event) {
-	event.preventDefault();
-	find_route($("#from_pos").val(), $("#to_pos").val());
+    $("#find_route").submit(function(event) {
+	    event.preventDefault();
+		// auto fill the origin with user's current location if origin is not filled
+	    if($("#from_pos").val() == ""){
+		    navigator.geolocation.getCurrentPosition(function(position){
+		    var geocoder = new google.maps.Geocoder();
+		    geocoder.geocode({
+			    "location": new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
+		    },
+		function(results, status){
+			if(status == google.maps.GeocoderStatus.OK)
+				$("#from_pos").val(results[0].formatted_address);
+			else$("#error").append("Unable to retrive your location<br/>");
+		});
+	});
+		// NOT CORRECT YET
+		// auto fill the destination with vendor's latlng if destination is not filled
+	    }if($("#to_pos").val() == ""){
+		    //TODO: get the auto_position passed in
+		    //find_route($("#from_pos").val(),marker.position());			
+		    $("#to_pos").val(new google.maps.LatLng(getlatlng.lat, getlatlng.lng));
+			$("#error").append("to_pos is null<br />");
+	    }else{
+	        find_route($("#from_pos").val(), $("#to_pos").val());
+	    }
 	});
 });

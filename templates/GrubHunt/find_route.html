@@ -46,9 +46,23 @@
 	
 	<!-- display info of the vendor -->
 	{% if vendor %}
+	{% if not vendor.businessName %}
+	Name: NoName</br>
+	{% else %}
 	Name: {{vendor.businessName}}</br>
+	{% endif %}
 	Description: {{vendor.description}}</br>
 	Adress: {{vendor.address}}</br>
+	<script> 
+            $( window ).load(function() {
+             console.log("add the food trucks");
+             plotFoodTruck({{vendor.latitude}},
+             {{vendor.longitude}}, 
+              "{{vendor.businessName}}");
+			 getlatlng({{vendor.latitude}},
+			 {{vendor.longitude}});
+           }); 
+      </script>
 	{% endif %}
 	
 	<!-- find route text boxes -->
@@ -57,17 +71,11 @@
 			
 			<!-- Textboxes for inputting from and to position -->
             <label for="origin">Origin:</label> 
-			<input type="text" id="from_pos" name="from_pos" required="required" />
-			<!-- try to get current loc
-			<a id="from-link" href="#">Get my position</a>
-			-->
+			<input type="text" id="from_pos" name="from_pos" placeholder="Your Location" />
 			<br />
 			
             <label for="destination">Destination:</label>
-			<input type="text" id="to_pos" name="to_pos" required="required" />
-			<!-- try to get current loc
-			<a id="to-link" href="#">Get my position</a>
-			-->
+			<input type="text" id="to_pos" name="to_pos" placeholder="Vendor's Location"/>
 			<br />
 
             <!-- Provide a button to click to submit the form. -->
