@@ -22,15 +22,15 @@
           }
           #map {
 			width: 600px;
-            height: 500px;
+            height: 400px;
 			float: left;
 			padding: 10px;
           }
 		  #nav {
 			line-height: 30px;
 			backgound-color: #eeeeee;
-			height: 300px;
-			width: 300px;
+			height: 400px;
+			width: 400px;
 			float: left;
 			padding: 5px;
 		  }
@@ -59,8 +59,6 @@
              plotFoodTruck({{vendor.latitude}},
              {{vendor.longitude}}, 
               "{{vendor.businessName}}");
-			 getlatlng({{vendor.latitude}},
-			 {{vendor.longitude}});
            }); 
       </script>
 	{% endif %}
@@ -72,10 +70,11 @@
 			<!-- Textboxes for inputting from and to position -->
             <label for="origin">Origin:</label> 
 			<input type="text" id="from_pos" name="from_pos" placeholder="Your Location" />
+			<a id="cur_loc" href="#">Get Current Location</a>
 			<br />
 			
             <label for="destination">Destination:</label>
-			<input type="text" id="to_pos" name="to_pos" placeholder="Vendor's Location"/>
+			<input type="text" id="to_pos" name="to_pos" value="{{vendor.latitude}},{{vendor.longitude}}" placeholder="Vendor's Location"/>
 			<br />
 
             <!-- Provide a button to click to submit the form. -->
