@@ -28,11 +28,16 @@
 			<hr style="clear:both;"/>
 </div>
 <br>
+<center>
+
+<form action="/GrubHunt/list_vendors/" method="get">
+        <input type="text" name="q">
+        <input type="submit" value="Search">
+    </form>
+</center>
+
     	<h1>Here is a list of food vendors in Vancouver:</h1>
-    
-
-
-      
+      {% if vendor_list %}
       {% for v in vendor_list %}
       <center><p>
       {% if not v.businessName %}
@@ -45,6 +50,9 @@
       {{v.address}},
        </a></p></center>
         {% endfor %}
+      {% else %}
+      <p> No matches found </p>
+      {% endif %}
 
 
 

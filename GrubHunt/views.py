@@ -176,7 +176,13 @@ def find_route(request,vendor_slug):
 
 
 def list_vendors(request):
-    vendor_list = FoodVendor.objects.order_by('businessName')
+
+    if 'q' in request.GET and request.GET['q']:
+        q = request.GET['q']
+        vendor_list = FoodVendor.objects.filter(description__contains=q) 
+    else:
+        vendor_list = FoodVendor.objects.order_by('businessName')
+
     context_dict = {'vendor_list':vendor_list}
 
     return render(request, 'GrubHunt/list_vendors.html', context_dict)
