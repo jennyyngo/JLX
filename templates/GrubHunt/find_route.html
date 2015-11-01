@@ -22,15 +22,15 @@
           }
           #map {
 			width: 600px;
-            height: 500px;
+            height: 400px;
 			float: left;
 			padding: 10px;
           }
 		  #nav {
 			line-height: 30px;
 			backgound-color: #eeeeee;
-			height: 300px;
-			width: 300px;
+			height: 400px;
+			width: 400px;
 			float: left;
 			padding: 5px;
 		  }
@@ -43,27 +43,38 @@
   
 	<!-- Layout as nav mode to display the info of restruant -->
 	<div id="nav">
-	This will display as a nav</br>
-	Name: </br>
-	Description: </br>
-	Adress: </br>
 	
+	<!-- display info of the vendor -->
+	{% if vendor %}
+	{% if not vendor.businessName %}
+	Name: NoName</br>
+	{% else %}
+	Name: {{vendor.businessName}}</br>
+	{% endif %}
+	Description: {{vendor.description}}</br>
+	Adress: {{vendor.address}}</br>
+	<script> 
+            $( window ).load(function() {
+             console.log("add the food trucks");
+             plotFoodTruck({{vendor.latitude}},
+             {{vendor.longitude}}, 
+              "{{vendor.businessName}}");
+           }); 
+      </script>
+	{% endif %}
+	
+	<!-- find route text boxes -->
 		<form id="find_route" name="find_route" method="POST" action="#">
             {% csrf_token %}
 			
 			<!-- Textboxes for inputting from and to position -->
             <label for="origin">Origin:</label> 
-			<input type="text" id="from_pos" name="from_pos" required="required" />
-			<!-- try to get current loc
-			<a id="from-link" href="#">Get my position</a>
-			-->
+			<input type="text" id="from_pos" name="from_pos" placeholder="Your Location" />
+			<a id="cur_loc" href="#">Get Current Location</a>
 			<br />
 			
             <label for="destination">Destination:</label>
-			<input type="text" id="to_pos" name="to_pos" required="required" />
-			<!-- try to get current loc
-			<a id="to-link" href="#">Get my position</a>
-			-->
+			<input type="text" id="to_pos" name="to_pos" value="{{vendor.latitude}},{{vendor.longitude}}" placeholder="Vendor's Location"/>
 			<br />
 
             <!-- Provide a button to click to submit the form. -->
@@ -72,7 +83,7 @@
 	</div>
 	
 	  
-		<div id="map"></div>
+	<div id="map"></div>
 
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKhtN-Y5ahiOTzVHtpMLC3bBqs8j6s56Q&callback=initMap"
 			async defer></script>

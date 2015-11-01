@@ -1,5 +1,5 @@
 var map;
-
+var marker;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -9,7 +9,7 @@ function initMap() {
 }
 
 function plotFoodTruck(latitude, longitude, businessName) {
-	 var marker = new google.maps.Marker({
+	marker = new google.maps.Marker({
     position: {lat: latitude, lng: longitude}, 
     map: map,
     title: businessName
