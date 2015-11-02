@@ -3,32 +3,40 @@ var marker;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 49.28449252, lng: -123.1429261},
+    center: {lat: 49.27899252, lng: -123.13000000},
     zoom: 14
   });
 }
 
-function plotFoodTruck(latitude, longitude, businessName) {
+
+
+function plotFoodTruck(latitude, longitude, businessName, slug) {
 	marker = new google.maps.Marker({
     position: {lat: latitude, lng: longitude}, 
     map: map,
-    title: businessName
+    title: businessName,
+    slug: slug,  
 
   });
 
 var contentString = '<div id="content">'+
       '<div id="siteNotice">'+
       '</div>'+
-      '<h3 id="firstHeading" class="firstHeading">'+businessName+'</h3>'+
+      '<h3 id="firstHeading" class="firstHeading">'+businessName+'<br>'+
+'<a href="/GrubHunt/vendors">'+"(Food Truck Vendor)"+'</a>'+'</h3>'+
       '</div>';
 
   var infowindow = new google.maps.InfoWindow({
     content: contentString
   });
 
-  marker.addListener('click', function() {
+
+  google.maps.event.addListener(marker, 'click', function() {
+    infowindow.close();
+    infowindow.setContent(contentString);
     infowindow.open(map, marker);
   });
+return marker;
 }
 
 

@@ -19,17 +19,54 @@
             height: 100%;
             margin: 0;
             padding: 0;
+
           }
+           a:link {
+      color: #3EA99F;
+    }
+    a:visited {
+      color: #78C7C7;
+    }
+          h1 {
+      color: #3EA99F;
+      font-size: 50px;
+    }
+    h2 {
+      color: #3EA99F;
+      font-size: 20px;
+    }
           #map {
-            height: 100%;
+            margin: 0 auto;
+            height: 80%;
+            width: 80%;
           }
+          #header {
+      background-color: #657383;
+
+    }
+
+
         </style>
 
     </head>
 
     <body>
+      <div id="header">
 
-		<h1>Food Vendors Search</h1>
+        
+        <h2 style="text-align:left;float:left;">
+          {% if user.is_authenticated %}
+          <a href="/GrubHunt/logout">Logout</a></h1>
+        {% else %}  
+        <a href="/GrubHunt/login">Login</a>
+      {% endif %}
+    </h1>
+        
+
+      <h2 style="text-align:right;float:right;"><a href="/GrubHunt/list_vendors">List View</a></h2>
+      <hr style="clear:both;"/>
+</div>
+		<h1>All food vendors on a map!</h1>
 		
     {% if vendor_list %}
       {% for v in vendor_list %}
@@ -41,38 +78,24 @@
               "{{v.businessName}}");
            }); 
       </script>
-      <p>
-      {% if not v.businessName %}
-      <font color="blue">Food Truck Place,</font>
-      {% else %}
-      {{v.businessName}},
-      {% endif %}
-      {{v.description}},
-      Lat: {{v.latitude}},
-      Long: {{v.longitude}} </p>
       {% endfor %}
     {% endif %}
 
 	
 	<!-- Find Route Functionality -->
-		<h1>Find Route</h1>
-		<form id="find_route" name="find_route" method="POST" action="#">
+<form id="find_route" name="find_route" method="POST" action="#">
             {% csrf_token %}
-			
-			<!-- Textboxes for inputting from and to position -->
+      
+      <!-- Textboxes for inputting from and to position -->
             <label for="origin">Origin:</label> 
-			<input type="text" id="from_pos" name="from_pos" required="required" />
-			<!-- try to get current loc
-			<a id="from-link" href="#">Get my position</a>
-			-->
-			<br />
-			
+      <input type="text" id="from_pos" name="from_pos" placeholder="Your Location" />
+      <a id="cur_loc" href="#">Get Current Location</a>
+      <br />
+      
             <label for="destination">Destination:</label>
-			<input type="text" id="to_pos" name="to_pos" required="required" />
-			<!-- try to get current loc
-			<a id="to-link" href="#">Get my position</a>
-			-->
-			<br />
+      <input type="text" id="to_pos" name="to_pos" value="{{vendor.latitude}},{{vendor.longitude}}" placeholder="Vendor's Location"/>
+      <br />
+
 
             <!-- Provide a button to click to submit the form. -->
             <input type="submit" value="Get Route" />

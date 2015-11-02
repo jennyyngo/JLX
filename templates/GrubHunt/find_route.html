@@ -34,6 +34,20 @@
 			float: left;
 			padding: 5px;
 		  }
+		  a:link {
+    	color: #3EA99F;
+    }
+    a:visited {
+    	color: #78C7C7;
+    }
+    h1 {
+    	color: #3EA99F;
+    	font-size: 50px;
+    }
+     h2 {
+        font-size: 17px;
+        color: #657383;
+    }
         </style>
 
     </head>
@@ -47,7 +61,7 @@
 	<!-- display info of the vendor -->
 	{% if vendor %}
 	{% if not vendor.businessName %}
-	Name: NoName</br>
+	<h2>Name: NoName</br>
 	{% else %}
 	Name: {{vendor.businessName}}</br>
 	{% endif %}
@@ -75,7 +89,7 @@
 			
             <label for="destination">Destination:</label>
 			<input type="text" id="to_pos" name="to_pos" value="{{vendor.latitude}},{{vendor.longitude}}" placeholder="Vendor's Location"/>
-			<br />
+			<br /></h2>
 
             <!-- Provide a button to click to submit the form. -->
             <input type="submit" value="Get Route" />

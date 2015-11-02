@@ -2,28 +2,67 @@
 <html>
     <head>
         <title>GrubHunt</title>
+
+         <style>
+         body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+          }
+         
+          
+		  #nav {
+			
+			background-color: #657383;
+			width: 25%;
+			float: left;
+			padding: 5px;
+			height: 100%;
+		  }
+		   h1 {
+    	color: #3EA99F;
+    	font-size: 50px;
+    }
+    h2 {
+    	font-size: 20px;
+    }
+
+		  a:link {
+    	color: #3EA99F;
+    }
+    a:visited {
+    	color: #78C7C7;
+    }
+        </style>
     </head>
 
     <body>
+
+    	<center>
     	{% if user.is_authenticated %}
-			<h1>GrubHunt says... hello {{ user.username }}!</h1>
+			<h1>Hello {{ user.username }}, Welcome to GrubHunt!</h1>
 		{% else %}
-			<h1>GrubHunt says... hello world!</h1>
+			<h1>Hello world! Welcome to GrubHunt!</h1>
 		{% endif %}
+	</center>
 
 
         {% if user.is_staff %}
-        	<p> Hello admin, would you like to  <a href="/GrubHunt/update/">update</a> the database? </p>
+        	<h2><center> Admin, would you like to  <a href="/GrubHunt/update/">update</a> the database?</center></h2>
         {% endif %} 
+
+        <div id="nav">
        	{% if user.is_authenticated %}
 			<a href="/GrubHunt/restricted/">Restricted Page</a><br />
-			<a href="/GrubHunt/vendors/">Food Trunk Vendors</a><br />
-			<a href="/GrubHunt/list_vendors/">List Vendors</a><br />
+			<a href="/GrubHunt/vendors/">Map of Vendors</a><br />
+			<a href="/GrubHunt/list_vendors/">List of Vendors</a><br />
 			<a href="/GrubHunt/logout/">Logout</a><br />
+			
 		{% else %}
 			<a href="/GrubHunt/register/">Register Here</a><br />
 			<a href="/GrubHunt/login/">Login</a><br />
 		{% endif %}
+	</div>
 
     </body>
 </html>

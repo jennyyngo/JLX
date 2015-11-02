@@ -7,7 +7,48 @@
         <title>GrubHunt - List Of Vendors</title>
 
     <style>
-    </style>
+
+    body {
+    	
+    	margin: 0 auto;
+    	color: #657383
+
+    }
+    #list {
+    	width: 70%;
+    	margin: 0 auto;
+    }
+    #header {
+    	background-color: #657383;
+
+    }
+
+    a:link {
+    	color: #3EA99F;
+    }
+    a:visited {
+    	color: #78C7C7;
+    }
+    h1 {
+    	color: #3EA99F;
+    	font-size: 50px;
+    }
+    h2 {
+    	font-size: 20px;
+    }
+    p {
+    	color: #657383;
+    }
+    .alignleft {
+    	float: left;
+    }
+    .alignright {
+    	float: right;
+    
+    }
+  
+</style>
+
     </head>
 
     <body>
@@ -15,44 +56,59 @@
     	<div id="header">
 
     		
-    		<h1 style="text-align:left;float:left;"><font size="4">
+    		<h2 style="text-align:left;float:left;">
     			{% if user.is_authenticated %}
     			<a href="/GrubHunt/logout">Logout</a></h1>
     		{% else %}	
     		<a href="/GrubHunt/login">Login</a>
     	{% endif %}
-    </font></h1>
+    </h1>
     		
 
-			<h2 style="text-align:right;float:right;"><font size="4"><a href="/GrubHunt/vendors">Map View</a></font></h2>
+			<h2 style="text-align:right;float:right;"><a href="/GrubHunt/vendors">Map View</a></h2>
 			<hr style="clear:both;"/>
 </div>
-<br>
+
 <center>
+<h1>What are you hungry for?</h1>
 
 <form action="/GrubHunt/list_vendors/" method="get">
         <input type="text" name="q">
         <input type="submit" value="Search">
     </form>
 </center>
+<br>
 
-    <h1>Here is a list of food vendors in Vancouver:</h1>
+
+<div id="list" style="clear: both;">
       {% if vendor_list %}
       {% for v in vendor_list %}
-      <center><p>
+      <br/><br/>
+     <p class="alignleft">
+
       {% if not v.businessName %}
       Food Truck Place
       {% else %}
       {{v.businessName}},
       {% endif %}
-      <br>
+      
+  </p>
+     
+ 
+  </b>
+      <center><font color="white">------------------------------</font></center>
+      
+ <p class="alignright">
       <a href="/GrubHunt/find_route/{{ v.slug }}">
+     
       {{v.address}},
-       </a></p></center>
-        {% endfor %}
+       </p></a></center>
+        {% endfor %} </div>
       {% else %}
+
       <p> No matches found </p>
       {% endif %}
+ 
 
 
 
