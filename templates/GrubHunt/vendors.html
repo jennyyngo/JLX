@@ -75,31 +75,12 @@
              console.log("add the food trucks");
              plotFoodTruck({{v.latitude}},
              {{v.longitude}}, 
-              "{{v.businessName}}");
+              "{{v.businessName}}",
+			  "{{v.slug}}");
            }); 
       </script>
       {% endfor %}
     {% endif %}
-
-	
-	<!-- Find Route Functionality -->
-<form id="find_route" name="find_route" method="POST" action="#">
-            {% csrf_token %}
-      
-      <!-- Textboxes for inputting from and to position -->
-            <label for="origin">Origin:</label> 
-      <input type="text" id="from_pos" name="from_pos" placeholder="Your Location" />
-      <a id="cur_loc" href="#">Get Current Location</a>
-      <br />
-      
-            <label for="destination">Destination:</label>
-      <input type="text" id="to_pos" name="to_pos" value="{{vendor.latitude}},{{vendor.longitude}}" placeholder="Vendor's Location"/>
-      <br />
-
-
-            <!-- Provide a button to click to submit the form. -->
-            <input type="submit" value="Get Route" />
-		</form>
 	
 	  
 		<div id="map"></div>
