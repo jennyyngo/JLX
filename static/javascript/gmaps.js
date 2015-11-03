@@ -10,11 +10,15 @@ function initMap() {
   });
 }
 
-function plotFoodTruck(latitude, longitude, businessName) {
+
+
+
+function plotFoodTruck(latitude, longitude, businessName, slug) {
 	var marker = new google.maps.Marker({
     position: {lat: latitude, lng: longitude}, 
     map: map,
     title: businessName,
+	slug: slug,
 
   });
 
@@ -22,7 +26,7 @@ var contentString = '<div id="content">'+
       '<div id="siteNotice">'+
       '</div>'+
       '<h3 id="firstHeading" class="firstHeading">'+businessName+'<br>'+
-'<a href="/GrubHunt/vendors">'+"(Food Truck Vendor)"+'</a>'+'</h3>'+
+'<a href="/GrubHunt/find_route/' + marker.slug + '">'+"(Food Truck Vendor)"+'</a>'+'</h3>'+
       '</div>';
 
   var infowindow = new google.maps.InfoWindow({
