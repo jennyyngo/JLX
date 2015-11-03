@@ -1,5 +1,7 @@
 var map;
 var marker;
+var infowindows = [];
+
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -7,8 +9,6 @@ function initMap() {
     zoom: 14
   });
 }
-
-
 
 function plotFoodTruck(latitude, longitude, businessName) {
 	var marker = new google.maps.Marker({
@@ -29,13 +29,26 @@ var contentString = '<div id="content">'+
     content: contentString
   });
 
+// gather all info windows so you can close them before opening a new one.
+infowindows.push(infowindow);
+
 
   google.maps.event.addListener(marker, 'click', function() {
-    infowindow.close();
+//     _.each(googlemap.infowindows, function(infowindow) {
+//     infowindow.close();
+// });
+    closeInfowWindows();
     infowindow.setContent(contentString);
     infowindow.open(map, marker);
+
   });
-return marker;
+}
+
+function closeInfowWindows() {
+  for (var i = 0; i < infowindows.length; i++) {
+    infowindows[i].close();
+
+  }
 }
 
 
