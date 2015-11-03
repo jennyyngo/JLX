@@ -34,6 +34,9 @@
 			float: left;
 			padding: 5px;
 		  }
+		  #header {
+    	background-color: #6D7B8D;
+}
 		  a:link {
     	color: #3EA99F;
     }
@@ -45,28 +48,48 @@
     	font-size: 50px;
     }
      h2 {
-        font-size: 17px;
-        color: #657383;
+        font-size: 20px;
+    }
+    h3 {
+    	font-size: 17px;
+    	color: #657383;
     }
         </style>
 
     </head>
  
   <body>
-  <h1>Find Route</h1>
+
+<!-- Header of the webpage-->
+  <div id="header">
+    		
+    		<h2 style="text-align:left;float:left;">
+    			{% if user.is_authenticated %}
+    			<a href="/GrubHunt/logout">Logout</a></h1>
+    		{% else %}	
+    		<a href="/GrubHunt/login">Login</a>
+    	{% endif %}
+    </h1>
+    		
+
+			<h2 style="text-align:right;float:right;"><a href="/GrubHunt">Home</a></h2>
+			<hr style="clear:both;"/>
+</div>
+
+<h1>Find the route!</h1>
   
 	<!-- Layout as nav mode to display the info of restruant -->
 	<div id="nav">
 	
 	<!-- display info of the vendor -->
-	{% if vendor %}
+	<h3>{% if vendor %}
 	{% if not vendor.businessName %}
-	<h2>Name: NoName</br>
+	Name: NoName</br>
 	{% else %}
-	Name: {{vendor.businessName}}</br>
+	<Name: {{vendor.businessName}}</br>
 	{% endif %}
 	Description: {{vendor.description}}</br>
-	Adress: {{vendor.address}}</br>
+	Address: {{vendor.address}}</br>
 	<script> 
             $( window ).load(function() {
              console.log("add the food trucks");

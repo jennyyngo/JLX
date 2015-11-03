@@ -19,7 +19,7 @@
     	margin: 0 auto;
     }
     #header {
-    	background-color: #657383;
+    	background-color: #6D7B8D;
 
     }
 
@@ -41,10 +41,15 @@
     }
     .alignleft {
     	float: left;
+    	text-align: left;
     }
     .alignright {
     	float: right;
-    
+    	text-align: right;
+    }
+    .aligncenter {
+    	float: left;
+    	text-align: 
     }
   
 </style>
@@ -58,12 +63,11 @@
     		
     		<h2 style="text-align:left;float:left;">
     			{% if user.is_authenticated %}
-    			<a href="/GrubHunt/logout">Logout</a></h1>
+    			<a href="/GrubHunt/logout">Logout</a></h2>
     		{% else %}	
     		<a href="/GrubHunt/login">Login</a>
     	{% endif %}
-    </h1>
-    		
+    
 
 			<h2 style="text-align:right;float:right;"><a href="/GrubHunt/vendors">Map View</a></h2>
 			<hr style="clear:both;"/>
