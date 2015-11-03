@@ -10,12 +10,11 @@ function initMap() {
 
 
 
-function plotFoodTruck(latitude, longitude, businessName, slug) {
-	marker = new google.maps.Marker({
+function plotFoodTruck(latitude, longitude, businessName) {
+	var marker = new google.maps.Marker({
     position: {lat: latitude, lng: longitude}, 
     map: map,
     title: businessName,
-    slug: slug,  
 
   });
 
