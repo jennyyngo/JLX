@@ -36,6 +36,10 @@
     h2 {
     	font-size: 20px;
     }
+    h3 {
+      font-size: 20px;
+      color: #FFFFFF;
+    }
     p {
     	color: #657383;
     }
@@ -63,10 +67,13 @@
     		
     		<h2 style="text-align:left;float:left;">
     			{% if user.is_authenticated %}
-    			<a href="/GrubHunt/logout">Logout</a></h2>
+    			<a href="/GrubHunt/logout">Logout </a>
     		{% else %}	
-    		<a href="/GrubHunt/login">Login</a>
+    		<a href="/GrubHunt/login">Login </a></h2>
     	{% endif %}
+      
+      <a href="/GrubHunt">/ Home</a>
+    </h2>
     
 
 			<h2 style="text-align:right;float:right;"><a href="/GrubHunt/vendors">Map View</a></h2>
