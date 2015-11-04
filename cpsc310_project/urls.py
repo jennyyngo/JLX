@@ -9,6 +9,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^GrubHunt/', include('GrubHunt.urls')), # ADD THIS NEW TUPLE!
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
 )
 
 # UNDERNEATH your urlpatterns definition, add the following two lines:
@@ -17,5 +18,4 @@ if settings.DEBUG:
         'django.views.static',
         (r'^media/(?P<path>.*)',
         'serve',
-        {'document_root': settings.MEDIA_ROOT}), 
-        (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),)
+        {'document_root': settings.MEDIA_ROOT}), )
