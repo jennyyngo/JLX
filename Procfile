@@ -1,0 +1,1 @@
+web: gunicorn cpsc310_project.wsgi --log-file -

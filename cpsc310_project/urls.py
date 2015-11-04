@@ -9,6 +9,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^GrubHunt/', include('GrubHunt.urls')), # ADD THIS NEW TUPLE!
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_PATH}),
 )
 
 # UNDERNEATH your urlpatterns definition, add the following two lines:

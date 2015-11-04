@@ -1,0 +1,16 @@
+Django==1.7
+googlemaps==2.3
+pbr==1.8.1
+Pillow==3.0.0
+requests==2.6.0
+six==1.10.0
+stevedore==1.9.0
+virtualenv==13.1.2
+virtualenv-clone==0.2.6
+virtualenvwrapper==4.7.1
+dj-database-url==0.3.0
+dj-static==0.0.6
+gunicorn==19.1.1
+psycopg2==2.5.1
+static==0.4
+wsgiref==0.1.2
