@@ -89,6 +89,7 @@ TEMPLATE_DIRS = (
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # Absolute path to the media directory
 
+
 #Database directories 
 DATABASES = {
     'default': {
@@ -105,3 +106,4 @@ PASSWORD_HASHERS = (
 LOGIN_URL = '/GrubHunt/login/'
 
 DATA_FILE = os.path.join(BASE_DIR, 'static/data/street_food_vendors.csv')
+

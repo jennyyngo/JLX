@@ -12,7 +12,6 @@ import googlemaps
 from datetime import datetime
 
 
-
 def index(request):
     # Query the database for a list of ALL categories currently stored.
     # Order the categories by no. likes in descending order.
