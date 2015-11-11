@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from GrubHunt.models import FoodVendor
+from GrubHunt.models import FoodVendor, UserProfile
 from GrubHunt.populate import DatabasePopulater
 from GrubHunt.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login
@@ -154,8 +154,6 @@ def vendors(request):
 		
     return render(request, 'GrubHunt/vendors.html', context_dict)
 
-# have not decided if want a separate view for finding route
-# this view does the same thing in the find_route function in vendors view
 
 def find_route(request,vendor_slug):
     context_dict = {}
@@ -182,4 +180,14 @@ def list_vendors(request):
     context_dict = {'vendor_list':vendor_list}
 
     return render(request, 'GrubHunt/list_vendors.html', context_dict)
+
+
+def profile(request,userprofile_slug):
+
+    context_dict = {}
+    userprofile = UserProfile.objects.get(slug=userprofile_slug)
+    context_dict['userprofile'] = userprofile
+    context_dict['userprofile_slug'] = userprofile.slug
+    context_dict['user'] = userprofile.user
+    return render(request, 'GrubHunt/profile.html', context_dict)
 
