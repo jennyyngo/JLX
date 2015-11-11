@@ -52,8 +52,9 @@
         {% endif %} 
 
         <div id="nav">
+            <h2>
        	{% if user.is_authenticated %}
-        <h2>
+        
 			<a href="/GrubHunt/vendors/">Map of Vendors</a><br />
 			<a href="/GrubHunt/list_vendors/">List of Vendors</a><br />
 			<a href="/GrubHunt/logout/">Logout</a><br />
@@ -63,6 +64,8 @@
 			<a href="/GrubHunt/register/">Register Here</a><br />
 			<a href="/GrubHunt/login/">Login</a><br />
 		{% endif %}
+
+
     </h2>
 	</div>
 
