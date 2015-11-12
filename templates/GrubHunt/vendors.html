@@ -13,37 +13,14 @@
         
 		<meta name="viewport" content="initial-scale=1.0">
         <meta charset="utf-8" />
-		
+		<link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
         <style>
-          html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
 
-          }
-           a:link {
-      color: #3EA99F;
-    }
-    a:visited {
-      color: #78C7C7;
-    }
-          h1 {
-      color: #3EA99F;
-      font-size: 50px;
-    }
-    h2 {
-      color: #3EA99F;
-      font-size: 20px;
-    }
           #map {
             margin: 0 auto;
             height: 80%;
             width: 80%;
           }
-          #header {
-      background-color: #6D7B8D;
-
-    }
 
 
         </style>
@@ -51,21 +28,23 @@
     </head>
 
     <body>
-      <div id="header">
-
-        
-        <h2 style="text-align:left;float:left;">
+<!-- Header of the webpage-->
+  <div id="header">
+    		
+    <h2 class="alignleft">
           {% if user.is_authenticated %}
-          <a href="/GrubHunt/logout">Logout </a>
-        {% else %}  
-        <a href="/GrubHunt/login">Login </a>
-      {% endif %}
-      <a href="/GrubHunt">/ Home</a>
+          	<a href="/GrubHunt/logout">Logout </a>
+          {% else %}  
+         	<a href="/GrubHunt/login">Login </a>
+          {% endif %}
+          <a href="/GrubHunt">/ Home</a>
     </h2>
-        
+    		
 
-      <h2 style="text-align:right;float:right;"><a href="/GrubHunt/list_vendors">List View</a></h2>
-      <hr style="clear:both;"/>
+	<h2 class="alignright">
+		<a href="/GrubHunt/list_vendors">List View</a>
+	</h2>
+
 </div>
 		<h1>All food vendors on a map!</h1>
 		

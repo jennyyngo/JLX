@@ -14,48 +14,17 @@
 		<meta name="viewport" content="initial-scale=1.0">
         <meta charset="utf-8" />
 		
-        <style>
-          html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-          }
-          #map {
-			width: 600px;
-            height: 400px;
-			float: left;
-			padding: 10px;
-          }
-		  #nav {
-			line-height: 30px;
-			backgound-color: #eeeeee;
-			height: 400px;
-			width: 400px;
-			float: left;
-			padding: 5px;
-		  }
-		  #header {
-    	background-color: #6D7B8D;
-}
-		  a:link {
-    	color: #3EA99F;
-    }
-    a:visited {
-    	color: #78C7C7;
-    }
-    h1 {
-    	color: #3EA99F;
-    	font-size: 50px;
-    }
-     h2 {
-        font-size: 20px;
-    }
-    h3 {
-    	font-size: 17px;
-    	color: #657383;
-    }
-        </style>
-
+		<link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
+		
+		<style>
+			#map {
+				width: 600px;
+    			height: 400px;
+				float: left;
+				padding: 10px;
+			}
+		</style>
+		
     </head>
  
   <body>
@@ -72,47 +41,54 @@
 }(document, 'script', 'facebook-jssdk'));
 </script>
 
-
 <!-- Header of the webpage-->
   <div id="header">
     		
-    		<h2 style="text-align:left;float:left;">
+    <h2 class="alignleft">
           {% if user.is_authenticated %}
-          <a href="/GrubHunt/logout">Logout </a>
-        {% else %}  
-        <a href="/GrubHunt/login">Login </a>
-      {% endif %}
-      <a href="/GrubHunt">/ Home</a>
+          	<a href="/GrubHunt/logout">Logout </a>
+          {% else %}  
+         	<a href="/GrubHunt/login">Login </a>
+          {% endif %}
+          <a href="/GrubHunt">/ Home</a>
     </h2>
     		
 
-			<h2 style="text-align:right;float:right;"><a href="/GrubHunt/vendors">Map View </a><a href="/GrubHunt/list_vendors">/ List View</a></h2>
-			<hr style="clear:both;"/>
+	<h2 class="alignright">
+		<a href="/GrubHunt/vendors">Map View </a>
+		<a href="/GrubHunt/list_vendors">/ List View</a>
+	</h2>
+
 </div>
 
 <h1>Find the route!</h1>
-  
+
+
+<div id="wrapper">  
 	<!-- Layout as nav mode to display the info of restruant -->
 	<div id="nav">
 	
-	<!-- display info of the vendor -->
-	<h3>{% if vendor %}
-	{% if not vendor.businessName %}
-	Name: NoName</br>
-	{% else %}
-	<Name: {{vendor.businessName}}</br>
-	{% endif %}
-	Description: {{vendor.description}}</br>
-	Address: {{vendor.address}}</br>
-	<script> 
+		<!-- display info of the vendor -->
+		<h3>
+		{% if vendor %}
+			{% if not vendor.businessName %}
+				Name: NoName</br>
+		{% else %}
+				Name: {{vendor.businessName}}</br>
+		{% endif %}
+
+		Description: {{vendor.description}}</br>
+		Address: {{vendor.address}}</br>
+
+		<script> 
             $( window ).load(function() {
              console.log("add the food trucks");
              plotFoodTruck({{vendor.latitude}},
              {{vendor.longitude}}, 
               "{{vendor.businessName}}");
            }); 
-      </script>
-	{% endif %}
+      	</script>
+		{% endif %}
 	
 	<!-- find route text boxes -->
 		<form id="find_route" name="find_route" method="POST" action="#">
@@ -126,19 +102,21 @@
 			
             <label for="destination">Destination:</label>
 			<input type="text" id="to_pos" name="to_pos" value="{{vendor.latitude}},{{vendor.longitude}}" placeholder="Vendor's Location"/>
-			<br /></h2>
-
-        <!-- Facebook like and share button -->
-        <div class="fb-like" data-href="http://127.0.0.1:8000/GrubHunt/find_route/{{ vendor.slug }}/" data-width="30px" data-layout="button" data-action="like" data-show-faces="false" data-share="true"></div>
-       <br/> 
+			</h2>
 
             <!-- Provide a button to click to submit the form. -->
             <input type="submit" value="Get Route" /> <br>
 		</form>
-
+		
+	<!-- Twitter button -->	
       <a href="https://twitter.com/share" class="twitter-share-button" data-text="I'm using GrubHunt to check out this cool food vendor!" data-size="large">Tweet</a>
       <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    </br>
+      <br/>
+     <!-- Facebook like and share button -->
+        <div class="fb-like" data-href="http://127.0.0.1:8000/GrubHunt/find_route/{{ vendor.slug }}/" data-width="30px" data-layout="button" data-action="like" data-show-faces="false" data-share="true"></div>
+       <br/> 
+
+    <p id="error"></p>
 	</div>
 	
 	  
@@ -146,6 +124,6 @@
 
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKhtN-Y5ahiOTzVHtpMLC3bBqs8j6s56Q&callback=initMap"
 			async defer></script>
-	<p id="error"></p>
+	</div>
   </body>
 </html>

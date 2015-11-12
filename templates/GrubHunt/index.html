@@ -1,60 +1,39 @@
 <!DOCTYPE html>
+
+{% load staticfiles %} 
+
 <html>
     <head>
         <title>GrubHunt</title>
-
-         <style>
-         body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-          }
-         
-          
+		<link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
+	    <style>
 		  #nav {
-			
 			background-color: #6D7B8D;
 			width: 25%;
 			float: left;
 			padding: 5px;
 			height: 100%;
 		  }
-		   h1 {
-    	color: #3EA99F;
-    	font-size: 50px;
-    }
-    h2 {
-    	font-size: 20px;
-    }
 
-		  a:link {
-    	color: #3EA99F;
-    }
-    a:visited {
-    	color: #78C7C7;
-    }
         </style>
     </head>
 
     <body>
 
-    	<center>
     	{% if user.is_authenticated %}
 			<h1>Hello {{ user.username }}, Welcome to GrubHunt!</h1>
 		{% else %}
 			<h1>Hello world! Welcome to GrubHunt!</h1>
 		{% endif %}
-	</center>
 
 
         {% if user.is_staff %}
-        	<h2><center> Admin, would you like to  <a href="/GrubHunt/update/">update</a> the database?</center></h2>
+        	<h2 class="aligncenter"> Admin, would you like to  <a href="/GrubHunt/update/">update</a> the database?</h2>
         {% endif %} 
 
-        <div id="nav">
-            <h2>
+        <div id="links">
+        <h2>
        	{% if user.is_authenticated %}
-        
 			<a href="/GrubHunt/vendors/">Map of Vendors</a><br />
 			<a href="/GrubHunt/list_vendors/">List of Vendors</a><br />
 			<a href="/GrubHunt/logout/">Logout</a><br />
@@ -64,8 +43,6 @@
 			<a href="/GrubHunt/register/">Register Here</a><br />
 			<a href="/GrubHunt/login/">Login</a><br />
 		{% endif %}
-
-
     </h2>
 	</div>
 

@@ -1,59 +1,16 @@
 <!DOCTYPE html>
 
-
+{% load staticfiles %} 
 
 <html>
     <head>
         <title>GrubHunt - List Of Vendors</title>
-
+		<link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
     <style>
 
-    body {
-    	
-    	margin: 0 auto;
-    	color: #657383
-
-    }
-    #list {
-    	width: 70%;
-    	margin: 0 auto;
-    }
-    #header {
-    	background-color: #6D7B8D;
-
-    }
-
-    a:link {
-    	color: #3EA99F;
-    }
-    a:visited {
-    	color: #78C7C7;
-    }
-    h1 {
-    	color: #3EA99F;
-    	font-size: 50px;
-    }
-    h2 {
-    	font-size: 20px;
-    }
     h3 {
       font-size: 20px;
       color: #FFFFFF;
-    }
-    p {
-    	color: #657383;
-    }
-    .alignleft {
-    	float: left;
-    	text-align: left;
-    }
-    .alignright {
-    	float: right;
-    	text-align: right;
-    }
-    .aligncenter {
-    	float: left;
-    	text-align: 
     }
   
 </style>
@@ -62,67 +19,61 @@
 
     <body>
 
-    	<div id="header">
-
+<!-- Header of the webpage-->
+  <div id="header">
     		
-    		<h2 style="text-align:left;float:left;">
-    			{% if user.is_authenticated %}
-    			<a href="/GrubHunt/logout">Logout </a>
-    		{% else %}	
-    		<a href="/GrubHunt/login">Login </a></h2>
-    	{% endif %}
-      
-      <a href="/GrubHunt">/ Home</a>
+    <h2 class="alignleft">
+          {% if user.is_authenticated %}
+          	<a href="/GrubHunt/logout">Logout </a>
+          {% else %}  
+         	<a href="/GrubHunt/login">Login </a>
+          {% endif %}
+          <a href="/GrubHunt">/ Home</a>
     </h2>
-    
+    		
 
-			<h2 style="text-align:right;float:right;"><a href="/GrubHunt/vendors">Map View</a></h2>
-			<hr style="clear:both;"/>
+	<h2 class="alignright">
+		<a href="/GrubHunt/vendors">Map View </a>
+	</h2>
+
 </div>
 
-<center>
+
 <h1>What are you hungry for?</h1>
 
-<form action="/GrubHunt/list_vendors/" method="get">
+<form class="aligncenter" action="/GrubHunt/list_vendors/" method="get">
         <input type="text" name="q">
         <input type="submit" value="Search">
     </form>
-</center>
+
 <br>
 
 
 <div id="list" style="clear: both;">
       {% if vendor_list %}
-      {% for v in vendor_list %}
-      <br/><br/>
-     <p class="alignleft">
-
-      {% if not v.businessName %}
-      Food Truck Place
+      		<p>
+      		{% for v in vendor_list %}
+      			<br/><br/><br/>
+     			<span class="alignleft">
+			      {% if not v.businessName %}
+      				Food Truck Place
+      			  {% else %}
+      				{{v.businessName}}
+      			  {% endif %}
+			 	</span>
+				
+			    <span class="alignright">
+      				<a href="/GrubHunt/find_route/{{ v.slug }}">
+     					{{v.address}}
+       				</a>
+       			</span>
+        	{% endfor %}
+        	</p> 
       {% else %}
-      {{v.businessName}},
+			<p> No matches found </p>
       {% endif %}
-      
-  </p>
-     
- 
-  </b>
-      <center><font color="white">------------------------------</font></center>
-      
- <p class="alignright">
-      <a href="/GrubHunt/find_route/{{ v.slug }}">
-     
-      {{v.address}},
-       </p></a></center>
-        {% endfor %} </div>
-      {% else %}
+ </div>
 
-      <p> No matches found </p>
-      {% endif %}
- 
-
-
-
-    </body>
+</body>
 
 </html>

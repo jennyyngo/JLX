@@ -1,12 +1,17 @@
 <!DOCTYPE html>
+
+{% load staticfiles %} 
+
 <html>
     <head>
         <title>GrubHunt - Register</title>
+        <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
     </head>
 
     <body>
+    <div id="wrapper">
         <h1>Register with GrubHunt</h1>
-
+		<p>
         {% if registered %}
         GrubHunt says: <strong>thank you for registering!</strong>
         <a href="/GrubHunt/">Return to the homepage.</a><br />
@@ -28,5 +33,7 @@
             <input type="submit" name="submit" value="Register" />
         </form>
         {% endif %}
+        </p>
+    </div>
     </body>
 </html>
