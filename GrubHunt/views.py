@@ -185,8 +185,12 @@ def profile(request,userprofile_slug):
 
     context_dict = {}
     userprofile = UserProfile.objects.get(slug=userprofile_slug)
+	# retrieve all vendors associated to the userprofile
+    vendors = FoodVendor.objects.filter(userprofile=userprofile)
+    
     context_dict['userprofile'] = userprofile
     context_dict['userprofile_slug'] = userprofile.slug
     context_dict['user'] = userprofile.user
+    context_dict['vendors'] = vendors
     return render(request, 'GrubHunt/profile.html', context_dict)
 

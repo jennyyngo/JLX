@@ -29,6 +29,10 @@ class FoodVendor(models.Model):
 	address = models.CharField(max_length=128)
 	description = models.CharField(max_length=128)
 	slug = models.SlugField(unique=True)
+	# many-to-many relationship between vendor and user,
+	# user can have many foodvendors and vendors can have
+	# many users 
+	userprofile = models.ManyToManyField(UserProfile)
 	
 	def save(self, *args, **kwargs):
 			self.slug = slugify(self.key)

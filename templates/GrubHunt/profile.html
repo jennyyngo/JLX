@@ -44,7 +44,20 @@
 		<img src= "{% static "images/unknownPic.png" %}" alt="unknownPic"/>
 		{% endif %}
 		<h3> UserName: {{user.username}}</h3>
-		<h3> Website: {{user.userprofile.website}}</h3>
+		<h3> Email: {{user.email}} </h3>
+		<h3> Website: <a href = "{{userprofile.website}}"> {{ userprofile.website}}</a></h3>
+		<h3> Favourite Vendors:</br>
+		{% if vendors %}
+			{% for v in vendors %}
+				{% if not vendor.businessName %}
+					Name: NoName
+				{% else %}
+					Name: {{vendor.businessName}}
+				{% endif %}
+				Address: 
+				<a href = "/GrubHunt/find_route/{{ v.slug }}"> {{ v.address }}</a><br/>
+			{% endfor %}
+		{% endif %}
 
 
   </body>

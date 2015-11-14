@@ -108,6 +108,16 @@
             <input type="submit" value="Get Route" /> <br>
 		</form>
 		
+	<!-- add to user's favourites button-->
+	<!-- calls addToFavourites function when pressed-->
+	<button onclick="addToFavourites()"> Add To Favourites</button></br>
+	
+	<script>
+	function addToFavourites(){
+	 // need to add the vendor to userprofile's vendors
+	}
+	</script>
+		
 	<!-- Twitter button -->	
       <a href="https://twitter.com/share" class="twitter-share-button" data-text="I'm using GrubHunt to check out this cool food vendor!" data-size="large">Tweet</a>
       <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -118,6 +128,7 @@
 
     <p id="error"></p>
 	</div>
+	
 	
 	  
 	<div id="map"></div>
