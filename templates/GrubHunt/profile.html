@@ -36,9 +36,15 @@
 
 		<!-- Need to fix the profile image path, user.userprofile.picture returns static/profile_images/img, 
 		but we just need the img name -->
-		Profile Picture: <img src= "/media/profile_images/{{user.userprofile.picture.name}}" alt="Profile Picture"/>
+		
+		<h3>Profile Picture:</h3> 
+		{% if userprofile.picture %}
+		<img src= "{{userprofile.picture.url}}" alt="Profile Picture"/>
+		{% else %}
+		<img src= "{% static "images/unknownPic.png" %}" alt="unknownPic"/>
+		{% endif %}
 		<h3> UserName: {{user.username}}</h3>
-		<h4> Website: {{user.userprofile.website}}</h3>
+		<h3> Website: {{user.userprofile.website}}</h3>
 
 
   </body>
