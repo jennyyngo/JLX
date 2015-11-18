@@ -194,3 +194,25 @@ def profile(request,userprofile_slug):
     context_dict['vendors'] = vendors
     return render(request, 'GrubHunt/profile.html', context_dict)
 
+# add vendo to user when button is clicked
+def add_vendor_to_user(request, vendor_slug):
+    try:
+	    userprofile = UserProfile.objects.get(slug=userprofile_slug)
+    except UserProfile.DoesNotExist:
+	    userprofile = None
+
+    if request.method == 'POST':
+        form = VendorForm(request.POST)
+        
+        if form.is_valid():
+            if userprofile:
+                vendor = form.save(commit=False)
+                vendor.userprofile = userprofile
+                vendor.save()
+                return find_route(request, vendor_slug)
+        else:
+		    print form.errors
+    else:
+        form = VendorForm()
+    
+    return render(request, 'GrubHunt/find_route/{{vendor_slug}}.html', {'form':form})

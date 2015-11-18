@@ -49,12 +49,12 @@
 		<h3> Favourite Vendors:</br>
 		{% if vendors %}
 			{% for v in vendors %}
-				{% if not vendor.businessName %}
-					Name: NoName
+				{% if v.businessName %}
+					Name: {{ v.businessName }}
 				{% else %}
-					Name: {{vendor.businessName}}
+					Name: No Name
 				{% endif %}
-				Address: 
+				</br>Address: 
 				<a href = "/GrubHunt/find_route/{{ v.slug }}"> {{ v.address }}</a><br/>
 			{% endfor %}
 		{% endif %}
