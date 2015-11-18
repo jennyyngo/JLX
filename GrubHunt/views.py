@@ -158,7 +158,7 @@ def find_route(request,vendor_slug):
     context_dict = {}
 	
     try:
-		# if we ccannot find a slug with given key raise a exception
+		# if we cannot find a slug with given key raise a exception
         vendor = FoodVendor.objects.get(slug=vendor_slug)
         context_dict['vendor'] = vendor
         context_dict['vendor_slug']=vendor.slug
@@ -195,24 +195,21 @@ def profile(request,userprofile_slug):
     return render(request, 'GrubHunt/profile.html', context_dict)
 
 # add vendo to user when button is clicked
+@login_required
 def add_vendor_to_user(request, vendor_slug):
+    context_dict = {}
+	
     try:
-	    userprofile = UserProfile.objects.get(slug=userprofile_slug)
+        user = request.user
+        userprofile = user.userprofile
+        context_dict['userprofile'] = userprofile
     except UserProfile.DoesNotExist:
 	    userprofile = None
 
     if request.method == 'POST':
-        form = VendorForm(request.POST)
-        
-        if form.is_valid():
-            if userprofile:
-                vendor = form.save(commit=False)
-                vendor.userprofile = userprofile
-                vendor.save()
-                return find_route(request, vendor_slug)
-        else:
-		    print form.errors
-    else:
-        form = VendorForm()
+        vendor = FoodVendor.objects.get(slug=vendor_slug)
+        vendor.userprofile.add(userprofile)
+        context_dict['vendor'] = vendor
+        return find_route(request, vendor_slug)
     
-    return render(request, 'GrubHunt/find_route/{{vendor_slug}}.html', {'form':form})
+    return render(request, 'GrubHunt/add_vendor_to_user.html', context_dict)

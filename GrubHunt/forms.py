@@ -15,8 +15,9 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ('website', 'picture')
 		
-class FoodVendorForm(forms.ModelForm):
-    class Meta:
-        model = FoodVendor
+#class FoodVendorForm(forms.ModelForm):
+ #   class Meta:
+  #      model = FoodVendor
+   #     fields = '__all__'
 
 

@@ -109,14 +109,7 @@
 		</form>
 		
 	<!-- add to user's favourites button-->
-	<form id="add_vendor_to_user_form" method="post">
-			{% csrf_token %}
-            {% for hidden in form.hidden_fields %}
-                {{ hidden }}
-            {% endfor %}
-	<input type="submit" value= "Add To Favourites"/><br>
-	</form>
-	
+	<a href="/GrubHunt/find_route/{{vendor.slug}}/add_vendor_to_user">Add To Favourites</a>
 		
 	<!-- Twitter button -->	
       <a href="https://twitter.com/share" class="twitter-share-button" data-text="I'm using GrubHunt to check out this cool food vendor!" data-size="large">Tweet</a>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Add Vendor</title>
+    </head>
+
+    <body>
+        <h1>Add to Favourite</h1>
+		
+		
+        <form id="add_form" method="post">
+
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            {% for field in form.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field }}
+            {% endfor %}
+
+            <input type="submit" name="submit" value="Add to Favourite" />
+        </form>
+    </body>
+
+</html>

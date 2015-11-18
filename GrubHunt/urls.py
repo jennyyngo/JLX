@@ -13,4 +13,5 @@ urlpatterns = patterns('',
 	url(r'^find_route/(?P<vendor_slug>[\w\-]+)/$',views.find_route, name='find_route'),
 	url(r'^list_vendors/$', views.list_vendors, name='list_vendors'),
 	url(r'^profile/(?P<userprofile_slug>[\w\-]+)/$',views.profile, name='profile'),
+	url(r'^find_route/(?P<vendor_slug>[\w\-]+)/add_vendor_to_user/$',views.add_vendor_to_user, name='add_vendor_to_user'),
 )
