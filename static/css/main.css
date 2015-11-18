@@ -41,6 +41,16 @@ html, body {
 	padding: 5px;
 }
 
+#sidebar {
+	min-width: 170px;
+	height: max;
+	float: left;
+	border-right: thin solid #657383;
+	padding-right: 5px;
+	margin: 5px;
+	height:100vh;
+}
+
 a:link {
 	color: #3EA99F;
 }
@@ -66,8 +76,14 @@ h3 {
     color: #657383;
 }
 
-
-  
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: thin solid #657383;
+    margin: 1em 0;
+    padding: 0; 
+}
 p {
 	color: #657383;
 }
