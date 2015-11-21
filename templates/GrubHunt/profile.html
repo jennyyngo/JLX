@@ -36,31 +36,46 @@
 
 		<!-- Need to fix the profile image path, user.userprofile.picture returns static/profile_images/img, 
 		but we just need the img name -->
-		
-		<h3>Profile Picture:</h3> 
-		{% if userprofile.picture %}
-		<img src= "{{userprofile.picture.url}}" alt="Profile Picture" width="150" height="150"/>
-		{% else %}
-		<img src= "{% static "images/unknownPic.png" %}" alt="unknownPic"/>
-		{% endif %}
-		<h3> UserName: {{user.username}}</h3>
-		<h3> Email: {{user.email}} </h3>
-		<h3> Website: <a href = "{{userprofile.website}}"> {{ userprofile.website}}</a></h3>
-		<h3> Favourite Vendors:</br>
-		{% if vendors %}
-			{% for v in vendors %}
-				{% if not vendor.businessName %}
-					Name: NoName
+		<div id="wrapper">
+			<div id="sidebar"> 
+				{% if userprofile.picture %}
+					<img src= "{{userprofile.picture.url}}" alt="Profile Picture" width="160"/>
 				{% else %}
-					Name: {{vendor.businessName}}
+					<img src= "{% static "images/unknownPic.png" %}" alt="unknownPic"  width="160" />
 				{% endif %}
-				Address: 
-				<a href = "/GrubHunt/find_route/{{ v.slug }}"> {{ v.address }}</a></h3><br/>
-			{% endfor %}
-		{% endif %}
-
-		<h3><a href="/GrubHunt/profile/{{ userprofile.slug }}/edit_profile">Edit your profile</a></h3>
-
-
+				<h3> Email: <br /> <a href = "mailto:{{user.email}}}">{{user.email}}</a> </h3>
+				<h3> Website: <br /> <a href = "{{userprofile.website}}"> {{ userprofile.website}}</a></h3>
+				<h3><a href="/GrubHunt/profile/{{userprofile.slug}}/edit_profile">Edit Profile</a></h3>
+		
+			</div>
+			<h3> {{user.username}}</h3>
+			<hr>
+			<h3> Favourite Vendors:</br>
+			
+			{% if vendors %}
+			<p>
+      			{% for v in vendors %}
+	     			<span class="alignleft">
+				      {% if v.businessName %}
+						{{ v.businessName }}
+					  {% else %}
+						No Name
+					  {% endif %}
+			 	    </span>
+				
+			    <span class="alignright">
+       				<a href="/GrubHunt/find_route/{{ v.slug }}">
+     					{{v.address}}
+       				</a>
+       			</span>
+       			<br/><br/>
+        	{% endfor %}
+        	</p> 
+      	{% else %}
+			<p> No venders have been added </p>
+      	{% endif %}
+			
+		</div>
+		</div>
   </body>
 </html>
