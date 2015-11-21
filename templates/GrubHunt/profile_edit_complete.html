@@ -4,7 +4,7 @@
 
 <html>
     <head>
-        <title>GrubHunt - Add Vendor</title>
+        <title>GrubHunt - Profile updated</title>
         
 		<meta name="viewport" content="initial-scale=1.0">
         <meta charset="utf-8" />
@@ -33,23 +33,7 @@
 	</h2>
 </div>
 
-        <h1>Confirm Add to Favourite?</h1>
-		
-		<form id="add_form" method="post" style="text-align: center;">
-
-            {% csrf_token %}
-            {% for hidden in form.hidden_fields %}
-                {{ hidden }}
-            {% endfor %}
-
-            {% for field in form.visible_fields %}
-                {{ field.errors }}
-                {{ field.help_text }}
-                {{ field }}
-            {% endfor %}
-
-            <input type="submit" name="submit" value="Add to Favourite" />
-        </form>
+        <h2>Your profile has been updated</h2>
 
     </body>
 

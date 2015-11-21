@@ -33,16 +33,17 @@
 	</h2>
 
 </div>
-
+<div id="wrapper">
 		<!-- Need to fix the profile image path, user.userprofile.picture returns static/profile_images/img, 
 		but we just need the img name -->
 {% if user.is_authenticated %}		
-<form id="form" method="POST" action="/GrubHunt/profile/{{ userprofile.slug }}/edit_profile/" >
+<form id="form" method="POST" action="/GrubHunt/profile/{{ userprofile.slug }}/edit_profile/" enctype="multipart/form-data" >
     {% csrf_token %}
-<!-- {{ user_form.as_p }} removed this out for now. Focused on getting the picture to save first--> 
+    {{ user_form.as_p }} 
     {{ profile_form.as_p }}
     <button type="submit">Save</button>
 </form>
+</div>
 {% endif %}
 
 

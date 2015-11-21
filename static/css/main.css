@@ -43,7 +43,6 @@ html, body {
 
 #sidebar {
 	min-width: 170px;
-	height: max;
 	float: left;
 	border-right: thin solid #657383;
 	padding-right: 5px;

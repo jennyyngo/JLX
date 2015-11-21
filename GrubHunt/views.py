@@ -56,7 +56,7 @@ def register(request):
             # If so, we need to get it from the input form and put it in the UserProfile model.
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
-
+            
             # Now we save the UserProfile model instance.
             profile.save()
 
@@ -91,7 +91,7 @@ def user_login(request):
                 # while the request.POST['<variable>'] will raise key error exception
         username = request.POST.get('username')
         password = request.POST.get('password')
-
+		
         # Use Django's machinery to attempt to see if the username/password
         # combination is valid - a User object is returned if it is.
         user = authenticate(username=username, password=password)
@@ -206,34 +206,43 @@ def profile(request,userprofile_slug):
 
 #     return render(request, 'GrubHunt/profile/{{userprofile.slug}}/edit_profile.html')
 
-
-
 @login_required
 def edit_profile(request, userprofile_slug):
-    user = request.user
-    profile = user.userprofile
+
+    profile = UserProfile.objects.get(slug=userprofile_slug)
+    user = profile.user
+    user_form = UserForm(instance=user)
+    profile_form = UserProfileForm(instance=profile)
+    
     if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=user)
-        profile_form = UserProfileForm(request.POST, instance=profile)
-        if all([user_form.is_valid(), profile_form.is_valid()]):
-            
-            user = user_form.save
-            user.set_password(user.password)
-            user.save()
-            user_form.save()
 
-            profile = profile_form.save(commit=False)
-            profile.user = user
-            
-            profile_form.picture = request.POST['picture']
-            profile_form.save()
+        # If the two forms are valid...
 
+		#update profile
+        profile.website = request.POST.get('website')
+        
+        if request.POST.get('picture-clear', False): 
+            profile.picture.delete()
+        
+        if 'picture' in request.FILES:
+            profile.picture.delete()
+            profile.picture = request.FILES['picture']
+        
+        #update user
+        user.username = request.POST.get('username')
+        user.email = request.POST.get('email')
+        
+        password = request.POST.get('password')
+        if password:
+            user.set_password(password)
 
-            return render(request, 'GrubHunt/profile.html')
+        # Now we save the UserProfile model instance and user instance.
+        user.save()
+        profile.save()
 
-    else:
-        user_form = UserForm(instance=user)
-        profile_form = UserProfileForm(instance=profile)
+        return render(request, 'GrubHunt/profile_edit_complete.html')
+    
+    
     
     return render(request, 'GrubHunt/edit_profile.html',
                        {'user_form': user_form, 'profile_form': profile_form, 'userprofile': profile})
