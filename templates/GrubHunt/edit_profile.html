@@ -4,7 +4,7 @@
 
 <html>
     <head>
-        <title>GrubHunt - User Profile</title>
+        <title>GrubHunt - Editing User Profile</title>
         
 		<meta name="viewport" content="initial-scale=1.0">
         <meta charset="utf-8" />
@@ -36,30 +36,16 @@
 
 		<!-- Need to fix the profile image path, user.userprofile.picture returns static/profile_images/img, 
 		but we just need the img name -->
-		
-		<h3>Profile Picture:</h3> 
-		{% if userprofile.picture %}
-		<img src= "{{userprofile.picture.url}}" alt="Profile Picture" width="150" height="150"/>
-		{% else %}
-		<img src= "{% static "images/unknownPic.png" %}" alt="unknownPic"/>
-		{% endif %}
-		<h3> UserName: {{user.username}}</h3>
-		<h3> Email: {{user.email}} </h3>
-		<h3> Website: <a href = "{{userprofile.website}}"> {{ userprofile.website}}</a></h3>
-		<h3> Favourite Vendors:</br>
-		{% if vendors %}
-			{% for v in vendors %}
-				{% if not vendor.businessName %}
-					Name: NoName
-				{% else %}
-					Name: {{vendor.businessName}}
-				{% endif %}
-				Address: 
-				<a href = "/GrubHunt/find_route/{{ v.slug }}"> {{ v.address }}</a></h3><br/>
-			{% endfor %}
-		{% endif %}
+{% if user.is_authenticated %}		
+<form id="form" method="POST" action="/GrubHunt/profile/{{ userprofile.slug }}/edit_profile/" >
+    {% csrf_token %}
+<!-- {{ user_form.as_p }} removed this out for now. Focused on getting the picture to save first--> 
+    {{ profile_form.as_p }}
+    <button type="submit">Save</button>
+</form>
+{% endif %}
 
-		<h3><a href="/GrubHunt/profile/{{ userprofile.slug }}/edit_profile">Edit your profile</a></h3>
+
 
 
   </body>

@@ -15,3 +15,13 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ('website', 'picture')
 
+# This is what I tried previously. Ignore it.
+# class EditProfileForm(forms.ModelForm):
+
+#     class Meta:
+#         model = User
+#         fields = ['username', 'email', ]
+    
+#     def __unit__(self, user, *args, **kwargs):
+#         self.user = user.get_profile()
+

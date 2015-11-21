@@ -108,3 +108,4 @@ LOGIN_URL = '/GrubHunt/login/'
 
 DATA_FILE = os.path.join(BASE_DIR, 'static/data/street_food_vendors.csv')
 
+AUTHO_PROFILE_MODULE = "user.UserProfile"

@@ -10,6 +10,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import logout
 import googlemaps
 from datetime import datetime
+from django.forms import ModelForm
 
 
 def index(request):
@@ -131,6 +132,7 @@ def user_logout(request):
 
 
 
+
 @staff_member_required
 def update(request):
     # Create a context dictionary which we can pass to the template rendering engine.
@@ -194,3 +196,44 @@ def profile(request,userprofile_slug):
     context_dict['vendors'] = vendors
     return render(request, 'GrubHunt/profile.html', context_dict)
 
+#Edit profile
+# @login_required
+# def edit_profile(request, userprofile_slug):
+#     if request.method == 'POST':
+#         form = UserProfileForm(request.user, request.POST)
+#         if form.is_valid():
+#              form.save()
+
+#     return render(request, 'GrubHunt/profile/{{userprofile.slug}}/edit_profile.html')
+
+
+
+@login_required
+def edit_profile(request, userprofile_slug):
+    user = request.user
+    profile = user.userprofile
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=user)
+        profile_form = UserProfileForm(request.POST, instance=profile)
+        if all([user_form.is_valid(), profile_form.is_valid()]):
+            
+            user = user_form.save
+            user.set_password(user.password)
+            user.save()
+            user_form.save()
+
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            
+            profile_form.picture = request.POST['picture']
+            profile_form.save()
+
+
+            return render(request, 'GrubHunt/profile.html')
+
+    else:
+        user_form = UserForm(instance=user)
+        profile_form = UserProfileForm(instance=profile)
+    
+    return render(request, 'GrubHunt/edit_profile.html',
+                       {'user_form': user_form, 'profile_form': profile_form, 'userprofile': profile})
