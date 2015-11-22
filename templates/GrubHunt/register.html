@@ -4,25 +4,54 @@
 
 <html>
     <head>
-        <title>GrubHunt - Register</title>
-        <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
+      <title>Register</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
     </head>
 
-    <body>
+<body>
+
+     <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span> 
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+             {% if user.is_authenticated %}
+             <li><a href="/GrubHunt/vendors/">Map of Vendors</a></li>
+             <li><a href="/GrubHunt/list_vendors/">List of Vendors</a></li>
+             <li><a href="/GrubHunt/logout/">Logout</a><br /></li>
+             {% else %}
+             <!-- <li><a href="/GrubHunt/register/">Register Here</a></li> -->
+             <li><a href="/GrubHunt">Home</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="jumbotron text-center">
     <div id="wrapper">
-        <h1>Register with GrubHunt</h1>
-		<p>
+        <h2>Register with GrubHunt</h2>
+		<h4>
         {% if registered %}
-        GrubHunt says: <strong>thank you for registering!</strong>
+        GrubHunt says: thank you for registerinng!
         <a href="/GrubHunt/">Return to the homepage.</a><br />
         {% else %}
-        GrubHunt says: <strong>register here!</strong><br />
 
         <form id="user_form" method="post" action="/GrubHunt/register/"
                 enctype="multipart/form-data">
 
             {% csrf_token %}
-
             <!-- Display each form. The as_p method wraps each element in a paragraph
                  (<p>) element. This ensures each element appears on a new line,
                  making everything look neater. -->

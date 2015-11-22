@@ -267,6 +267,7 @@ def add_vendor_to_user(request, vendor_slug):
     
     return render(request, 'GrubHunt/add_vendor_to_user.html', context_dict)
 
+@login_required
 def remove_vendor(request, userprofile_slug, vendor_slug):
     context_dict = {}
     try:

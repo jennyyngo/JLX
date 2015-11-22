@@ -3,37 +3,53 @@
 {% load staticfiles %} 
 
 <html>
-    <head>
-        <title>GrubHunt - Add Vendor</title>
-        
-		<meta name="viewport" content="initial-scale=1.0">
-        <meta charset="utf-8" />
-		<link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
+  <head>
+    <title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
 
-    </head>
+    <style>
+       #wrapper {
+          padding: 100px 25px;
+          border: 0;
+          overflow: hidden; /* will contain if #first is longer than #second */
+      }
+    </style>
+
+  </head>
  
-  <body>
+<body>
 
-<!-- Header of the webpage-->
-  <div id="header">
-    		
-    <h2 class="alignleft">
-          {% if user.is_authenticated %}
-          	<a href="/GrubHunt/logout">Logout </a>
-          {% else %}  
-         	<a href="/GrubHunt/login">Login </a>
-          {% endif %}
-          <a href="/GrubHunt">/ Home</a>
-    </h2>
-    		
+ <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+         {% if user.is_authenticated %}
+         <li><a href="/GrubHunt/vendors/">Map of Vendors</a></li>
+         <li><a href="/GrubHunt/list_vendors/">List of Vendors</a></li>
+         <li><a href="/GrubHunt/logout/">Logout</a><br /></li>
+         {% else %}
+         <!-- <li><a href="/GrubHunt/register/">Register Here</a></li> -->
+         <li><a href="/GrubHunt">Home</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
 
-	<h2 class="alignright">
-		<a href="/GrubHunt/vendors">Map View </a>
-		<a href="/GrubHunt/list_vendors">/ List View</a>
-	</h2>
-</div>
-
-        <h1>Confirm Add to Favourite?</h1>
+<div id="wrapper">
+<center><h3>Confirm Add to Favourite?</h3></center>
 		
 		<form id="add_form" method="post" style="text-align: center;">
 
