@@ -34,6 +34,7 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
          {% if user.is_authenticated %}
+         <li><a href="/GrubHunt">Home</a></li>
          <li><a href="/GrubHunt/profile/{{ user.userprofile.slug }}">Profile</a></li>
          <li><a href="/GrubHunt/vendors/">Map of Vendors</a></li>
          <li><a href="/GrubHunt/list_vendors/">List of Vendors</a></li>

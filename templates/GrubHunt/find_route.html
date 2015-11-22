@@ -53,6 +53,8 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
          {% if user.is_authenticated %}
+         <li><a href="/GrubHunt">Home</a></li>
+         <li><a href="/GrubHunt/profile/{{ user.userprofile.slug }}">Profile</a></li>
          <li><a href="/GrubHunt/vendors/">Map of Vendors</a></li>
          <li><a href="/GrubHunt/list_vendors/">List of Vendors</a></li>
          <li><a href="/GrubHunt/logout/">Logout</a><br /></li>
@@ -107,11 +109,11 @@
 			</h2>
 
             <!-- Provide a button to click to submit the form. -->
-            <input type="submit" value="Get Route" /> <br>
+            <input type="submit" value="Get Route" /> <br><br>
 		</form>
 		
 	<!-- add to user's favourites button-->
-	<a href="/GrubHunt/find_route/{{vendor.slug}}/add_vendor_to_user">Add To Favourites</a>
+	<a href="/GrubHunt/find_route/{{vendor.slug}}/add_vendor_to_user">Add To Favourites</a><br><br>
 		
 	<!-- Twitter button -->	
       <a href="https://twitter.com/share" class="twitter-share-button" data-text="I'm using GrubHunt to check out this cool food vendor!" data-size="large">Tweet</a>
