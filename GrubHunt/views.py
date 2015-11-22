@@ -247,7 +247,7 @@ def edit_profile(request, userprofile_slug):
     return render(request, 'GrubHunt/edit_profile.html',
                        {'user_form': user_form, 'profile_form': profile_form, 'userprofile': profile})
 
-# add vendo to user when button is clicked
+# add vendor to user when button is clicked
 @login_required
 def add_vendor_to_user(request, vendor_slug):
     context_dict = {}
@@ -266,3 +266,20 @@ def add_vendor_to_user(request, vendor_slug):
         return find_route(request, vendor_slug)
     
     return render(request, 'GrubHunt/add_vendor_to_user.html', context_dict)
+
+def remove_vendor(request, userprofile_slug, vendor_slug):
+    context_dict = {}
+    try:
+        userprofile = UserProfile.objects.get(slug=userprofile_slug)
+        vendor = FoodVendor.objects.get(slug=vendor_slug)
+        context_dict['userprofile'] = userprofile
+        context_dict['vendor']=vendor
+        context_dict['vendor_slug']=vendor.slug
+    except UserProfile.DoesNotExist:
+        userprofile = None
+    except FoodVendor.DoseNotExist:
+        vendor = None
+    if request.method == 'POST':
+        vendor.userprofile.remove(userprofile)
+        return profile(request, userprofile_slug)
+    return render(request, 'GrubHunt/remove_vendor.html', context_dict)

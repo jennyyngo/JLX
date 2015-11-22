@@ -56,6 +56,7 @@
 			<p>
       			{% for v in vendors %}
 	     			<span class="alignleft">
+					<a href="/GrubHunt/profile/{{userprofile.slug}}/remove_vendor/{{ v.slug }}">Remove From Favourites</a>
 				      {% if v.businessName %}
 						{{ v.businessName }}
 					  {% else %}
