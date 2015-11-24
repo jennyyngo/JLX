@@ -22,11 +22,12 @@ STATIC_PATH = os.path.join(BASE_DIR,'static')
 SECRET_KEY = '%qi1yhm02c)lndof$m+$rv7c5cyv7llv=c6!f^g)y8u+y%#prf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Turned debug to false for FB authentication
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = 'localhost', '127.0.0.1'
 
 
 # Application definition
@@ -39,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'GrubHunt',
+    'social.apps.django_app.default',
 )
 
 
@@ -50,6 +52,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
 )
 
 ROOT_URLCONF = 'cpsc310_project.urls'
@@ -109,3 +112,36 @@ LOGIN_URL = '/GrubHunt/login/'
 DATA_FILE = os.path.join(BASE_DIR, 'static/data/street_food_vendors.csv')
 
 AUTHO_PROFILE_MODULE = "user.UserProfile"
+
+#The following are for FB authentication:
+
+LOGIN_REDIRECT_URL = '/GrubHunt'
+
+LOGIN_ERROR_URL = '/GrubHunt'
+
+SOCIAL_AUTH_FACEBOOK_SECRET = '4a40f5bbecaa481caab182ef332ec086'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '534615750034781'
+
+REDIRECT_URI = '/GrubHunt'
+
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/GrubHunt'
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+   'django.contrib.auth.context_processors.auth',
+   'django.core.context_processors.debug',
+   'django.core.context_processors.i18n',
+   'django.core.context_processors.media',
+   'django.core.context_processors.static',
+   'django.core.context_processors.tz',
+   'django.contrib.messages.context_processors.messages',
+   'social.apps.django_app.context_processors.backends',
+   'social.apps.django_app.context_processors.login_redirect',
+)
+
+AUTHENTICATION_BACKENDS = (
+   'social.backends.facebook.FacebookOAuth2',
+       # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+   
+)

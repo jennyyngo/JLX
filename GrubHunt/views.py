@@ -11,6 +11,7 @@ from django.contrib.auth import logout
 import googlemaps
 from datetime import datetime
 from django.forms import ModelForm
+from django.template.context import RequestContext
 
 
 def index(request):
@@ -18,7 +19,7 @@ def index(request):
     # Order the categories by no. likes in descending order.
     # Retrieve the top 5 only - or all if less than 5.
     # Place the list in our context_dict dictionary which will be passed to the template engine.
-    context_dict = {}
+    context_dict = {'request': request, 'user': request.user}
 
     # Render the response and send it back!
     return render(request, 'GrubHunt/index.html', context_dict)
